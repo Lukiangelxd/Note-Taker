@@ -36,6 +36,11 @@ Start the application:
 2. 'npm start'
 3. Open your browser and go to http://localhost:3001 to use the Note Taker application.
 
+## Screenshots
+![Screenshot 2023-11-15 141712](https://github.com/Lukiangelxd/Note-Taker/assets/133689246/f357f1ca-343f-4315-9a9c-da6d9fd6fc9b)
+![Screenshot 2023-11-15 141724](https://github.com/Lukiangelxd/Note-Taker/assets/133689246/36d2115c-5df0-4d98-9738-2fb771524f30)
+
+
 ## Contributing
 Contributions are welcome! Please follow these guidelines:
 
