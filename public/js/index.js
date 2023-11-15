@@ -9,7 +9,7 @@ if (window.location.pathname === '/notes') {
   noteText = document.querySelector('.note-textarea');
   saveNoteBtn = document.querySelector('.save-note');
   newNoteBtn = document.querySelector('.new-note');
-  noteList = document.querySelectorAll('.list-container .list-group');
+  noteList = document.querySelector('.list-container .list-group');
 }
 
 // Show an element
@@ -31,6 +31,15 @@ const getNotes = () =>
     headers: {
       'Content-Type': 'application/json',
     },
+  })
+  .then(response => {
+    if (!response.ok) {
+      throw new Error('Failed to fetch notes');
+    }
+    return response.json();
+  })
+  .catch(error => {
+    console.error('Error fetching notes:', error);
   });
 
 const saveNote = (note) =>
@@ -40,6 +49,15 @@ const saveNote = (note) =>
       'Content-Type': 'application/json',
     },
     body: JSON.stringify(note),
+  })
+  .then(response => {
+    if (!response.ok) {
+      throw new Error('Failed to save note');
+    }
+    return response.json();
+  })
+  .catch(error => {
+    console.error('Error saving note:', error);
   });
 
 const deleteNote = (id) =>
@@ -48,10 +66,18 @@ const deleteNote = (id) =>
     headers: {
       'Content-Type': 'application/json',
     },
+  })
+  .then(response => {
+    if (!response.ok) {
+      throw new Error('Failed to delete note');
+    }
+  })
+  .catch(error => {
+    console.error('Error deleting note:', error);
   });
 
 const renderActiveNote = () => {
-  hide(saveNoteBtn);
+  hide(newNoteBtn);
 
   if (activeNote.id) {
     noteTitle.setAttribute('readonly', true);
@@ -102,7 +128,7 @@ const handleNoteView = (e) => {
   renderActiveNote();
 };
 
-// Sets the activeNote to and empty object and allows the user to enter a new note
+// Sets the activeNote to an empty object and allows the user to enter a new note
 const handleNewNoteView = (e) => {
   activeNote = {};
   renderActiveNote();
@@ -118,9 +144,9 @@ const handleRenderSaveBtn = () => {
 
 // Render the list of note titles
 const renderNoteList = async (notes) => {
-  let jsonNotes = await notes.json();
+  let jsonNotes = await notes;
   if (window.location.pathname === '/notes') {
-    noteList.forEach((el) => (el.innerHTML = ''));
+    noteList.innerHTML = '';
   }
 
   let noteListItems = [];
@@ -166,7 +192,7 @@ const renderNoteList = async (notes) => {
   });
 
   if (window.location.pathname === '/notes') {
-    noteListItems.forEach((note) => noteList[0].append(note));
+    noteListItems.forEach((note) => noteList.append(note));
   }
 };
 
