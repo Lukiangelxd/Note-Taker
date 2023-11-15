@@ -7,7 +7,7 @@ const path = require("path");
 //Helper method for creating unique ids
 const uniqid = require("uniqid");
 //Note import
-const Note = require('./routes/note.js')
+const Note = require('./routes/notes')
 //Port which the Express.js server will run
 const PORT = process.env.PORT || 3001;
 //Initialize an instance of Express.js
